@@ -9,13 +9,9 @@ class Housemate(models.Model):
 
 
 class Cook(models.Model):
-    user_objects = Housemate.objects.all()
-    PEOPLE_CHOICES = []
-    for user in user_objects:
-        PEOPLE_CHOICES.append((user.name, user.name))
     date = models.DateField()
     amount = models.FloatField()
-    kok = models.CharField(max_length=20, choices=PEOPLE_CHOICES)
+    kok = models.CharField(max_length=20)
     totalPeople = models.IntegerField()
 
     def __str__(self):
@@ -39,3 +35,4 @@ class HousemateEats(models.Model):
         name = self.name
         date_name = date + ', ' + name
         return date_name
+
