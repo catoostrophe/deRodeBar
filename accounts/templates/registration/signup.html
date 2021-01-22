@@ -1,0 +1,17 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static  'css/signup.css' %}">{% endblock %}
+{% block title %}Sign Up | De Rode Bar{% endblock %}
+
+{% block content %}
+    <div class="text-justify" style="padding-left: 5vw">
+        <br>
+        <h2>Sign up</h2><br>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-danger">Sign Up</button>
+        </form>
+    </div>
+{% endblock %}

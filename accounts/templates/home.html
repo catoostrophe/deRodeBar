@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Home | De Rode Bar{% endblock %}
+
+{% block content %}
+    <br>
+
+    {% if not user.is_authenticated %}
+        <h2 class="text-center"> Please log in in order to use this website. </h2>
+
+    {% else %}
+        <h2 class="text-center">Goedemorgen {{ user }}! </h2>
+        <br>
+
+        <table class="table table-dark text-center">
+            <thead>
+            <tr>
+                <th scope="col">Datum</th>
+
+                <!-- Add column for every housemate-->
+                {% for housemate in user_objects %}
+                    <th scope="col">{{ housemate.name }}</th>
+                {% endfor %}
+
+                <th scope="col">Kok</th>
+                <th scope="col">Bedrag</th>
+
+            </tr>
+            </thead>
+
+            <tbody class="align-middle">
+            <tr>
+
+                <th scope="col">{{ date }}</th>
+
+                <!-- The logged in user can set how many people eat on their behalf -->
+                {% for housemate in user_objects %}
+                    {% if housemate.name == user.username %}
+                        <th>
+
+                            <!-- TODO: should save whatever user inputs to database -->
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-paper-plane-o "></i></button>
+                            </form>
+                        </th>
+
+                    {% else %}
+
+                        <!-- TODO: should retrieve whether that housemate eats with the house on that date from the database -->
+                        <th>
+                            1
+                        </th>
+
+                    {% endif %}
+                {% endfor %}
+
+                <!-- TODO: make button work -->
+                <th>
+                    <button type="button" class="btn btn-light">Inschrijven</button>
+                </th>
+
+                <!-- Displays the $$ for the specified date -->
+                <th>
+                    {% for object in cook %}
+                        {% if object.date == date %}
+                            {{ object.amount }}
+                        {% endif %}
+                    {% endfor %}
+                </th>
+            </tr>
+
+            <tr>
+                <!-- TODO: add more dates -->
+            </tr>
+
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

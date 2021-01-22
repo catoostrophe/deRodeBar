@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'Open Sans Regular';
+    src: local('OpenSansRegular'),
+    url('../fonts/OpenSans-Regular.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'Open Sans Light';
+    src: local('OpenSansLight'),
+    url('../fonts/OpenSans-Light.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'Sofia';
+    src: local('SofiaRegular'),
+    url('../fonts/Sofia-Regular.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'Staatliches';
+    src: local('Staatliches'),
+    url('../fonts/Staatliches-Regular.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'RubikMonoOne';
+    src: local('RubikMonoOne'),
+    url('../fonts/RubikMonoOne-Regular.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'YuseiMagic';
+    src: local('YuseiMagic'),
+    url('../fonts/YuseiMagic-Regular.ttf') format("truetype");
+}
+
+body {
+    background-color: #212529 !important;
+    color: #D9D9D9 !important;
+    font-family: 'Open Sans Regular' !important;
+}
+
+h2 {
+    font-family: 'Sofia' !important;
+}
+
+.navbar-brand{
+    font-family: 'YuseiMagic' !important;
+    font-size: x-large !important;
+}
+
+a {
+    color: white;
+}
