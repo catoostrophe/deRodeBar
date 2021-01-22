@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'deRodeBar.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'kropmbqw',
+        'HOST': 'kandula.db.elephantsql.com',
+        'USER': 'kropmbqw',
+        'PASSWORD': 'SgdZM7ZsXc5fl29PvPOIQaTue-i0QNeA',
+        'PORT': '5432',
     }
 }
 
