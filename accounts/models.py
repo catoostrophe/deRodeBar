@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Housemate(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, default="", editable=False)
 
     def __str__(self):
         return self.name
@@ -27,12 +27,8 @@ class HousemateEats(models.Model):
         (3, 3)  # eating with house + 2 friends
     ]
     name = models.CharField(max_length=20)
-    date = models.DateField()
     eetMee = models.IntegerField(default=0, choices=NUMBER_CHOICES)
+    cook = models.ForeignKey(Cook, on_delete=models.CASCADE)
 
     def __str__(self):
-        date = self.date.strftime("%d/%m/%Y")
-        name = self.name
-        date_name = date + ', ' + name
-        return date_name
-
+        return self.name
