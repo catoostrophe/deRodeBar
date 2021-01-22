@@ -22,12 +22,13 @@ class Cook(models.Model):
         return self.date.strftime("%d/%m/%Y")
 
 
-class HousemateCook(models.Model):
+# Links every date to a specific housemate to check whether that housemate eats on that day
+class HousemateEats(models.Model):
     NUMBER_CHOICES = [
-        (0, 0),
-        (1, 1),
-        (2, 2),
-        (3, 3)
+        (0, 0),  # not eating with house
+        (1, 1),  # eating with house
+        (2, 2),  # eating with house + a friend
+        (3, 3)  # eating with house + 2 friends
     ]
     name = models.CharField(max_length=20)
     date = models.DateField()
