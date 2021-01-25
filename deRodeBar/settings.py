@@ -26,7 +26,7 @@ SECRET_KEY = 'sg%z8zlbg!oypsqw9dh@acf1wx2*$a9g50kc2(8d*==y*@j025'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["powerful-shelf-95603.herokuapp.com"]
 
 
 # Application definition
