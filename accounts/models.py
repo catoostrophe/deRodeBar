@@ -31,7 +31,4 @@ class Housemate_eats(models.Model):
     cook = models.ForeignKey(Cook, on_delete=models.CASCADE)
 
     def __str__(self):
-        cook = self.cook.__str__(self)
-        name = self.name
-        to_return = cook + ',' + name
-        return to_return
+        return self.name

@@ -37,9 +37,8 @@
                 {% for housemate in user_objects %}
                     {% if housemate.name == user.username %}
 
-                        <!-- TODO: should save whatever user inputs to database -->
                         <th>
-                            <form method="post">
+                            <form method="POST" action="{% url 'eet' date %}">
                                 {% csrf_token %}
                                 {{ form.as_p }}
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-paper-plane-o "></i>
