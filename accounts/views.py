@@ -18,25 +18,49 @@ def home_view(request):
     date = datetime.datetime.now().date()
     form = EetMeeForm
     cook = Cook.objects.all()
+    cook2 = Cook.objects.get(date=date)
+    eetmee = Housemate_eats.objects.filter(cook_id=cook2.pk)
+    names = []
+
+    for housemate in eetmee:
+        names.append(housemate.name)
 
     context = {
         'user_objects': user_objects,
         'date': date,
         'form': form,
-        'cook': cook
+        'cook': cook,
+        'eetmee': eetmee,
+        'names': names
     }
 
     return render(request, 'home.html', context)
 
 
-def eetMee(request, date):
+def eetMee(request, date, name):
     form = EetMeeForm(request.POST)
-    print(request.POST['eetmee'])
 
     if form.is_valid():
         cook = Cook.objects.get(date=date)
-        eat = Housemate_eats.objects.get(cook_id=cook.pk)
-        eat.eetmee = request.POST['eetmee']
-        eat.save()
+
+        if Housemate_eats.objects.filter(cook_id=cook.pk, name=name).exists():
+            eat = Housemate_eats.objects.get(cook_id=cook.pk, name=name)
+            eat.eetmee = request.POST['eetmee']
+            eat.save()
+        else:
+            newEat = Housemate_eats(name=name, eetmee=request.POST['eetmee'], cook=cook)
+            newEat.save()
 
     return redirect('home')
+
+
+def showEetmee(request, date, name):
+    cook = Cook.objects.get(date=date)
+    eat = Housemate_eats.objects.get(cook_id=cook.pk, name=name)
+
+    context = {
+        'eetmee': eat
+    }
+
+    redirect('home')
+    return render(request, 'home.html', context)

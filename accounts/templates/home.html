@@ -38,7 +38,7 @@
                     {% if housemate.name == user.username %}
 
                         <th>
-                            <form method="POST" action="{% url 'eet' date %}">
+                            <form method="POST" action="{% url 'eet' date=date name=user.username %}">
                                 {% csrf_token %}
                                 {{ form.as_p }}
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-paper-plane-o "></i>
@@ -48,9 +48,16 @@
 
                     {% else %}
 
-                        <!-- TODO: should retrieve whether that housemate eats with the house on that date from the database -->
                         <th>
-                            1
+                            {% if housemate.name not in names %}
+                                0
+                            {% else %}
+                                {% for housemate_eet in eetmee %}
+                                    {% if housemate_eet.name == housemate.name %}
+                                        {{ housemate_eet.eetmee }}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
                         </th>
 
                     {% endif %}
