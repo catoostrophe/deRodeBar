@@ -26,7 +26,7 @@ SECRET_KEY = 'sg%z8zlbg!oypsqw9dh@acf1wx2*$a9g50kc2(8d*==y*@j025'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["de-rode-bar.herokuapp.com"]
+ALLOWED_HOSTS = ["de-rode-bar.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
@@ -127,3 +127,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,  'static')
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+LOCAL_STATIC_CDN_PATH = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn_dir')
