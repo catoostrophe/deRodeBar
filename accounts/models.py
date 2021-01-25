@@ -10,9 +10,7 @@ class Housemate(models.Model):
 
 class Cook(models.Model):
     date = models.DateField()
-    amount = models.FloatField()
     kok = models.CharField(max_length=20)
-    totalpeople = models.IntegerField()
 
     def __str__(self):
         return self.date.strftime("%d/%m/%Y")

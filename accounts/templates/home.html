@@ -63,12 +63,19 @@
                     {% endif %}
                 {% endfor %}
 
-                <!-- TODO: make button work -->
                 <th>
-                    <button type="button" class="btn btn-light">Inschrijven</button>
+                    {% if cookExists %}
+                        {{ theCook }}
+                    {% else %}
+                        <form method="POST" action="{% url 'inschrijven' date=date name=user.username %}">
+                            {% csrf_token %}
+                            {{ form_inschrijven.as_p }}
+                            <button type="submit" class="btn btn-light">Inschrijven</button>
+                        </form>
+                    {% endif %}
                 </th>
 
-                <!-- Displays the $$ for the specified date -->
+                <!-- TODO: Displays the $$ for the specified date -->
                 <th>
                     {% for object in cook %}
                         {% if object.date == date %}
@@ -85,4 +92,7 @@
             </tbody>
         </table>
     {% endif %}
+{% endblock %}
+
+{% block js %}
 {% endblock %}

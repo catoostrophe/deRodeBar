@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.shortcuts import render, redirect
 from .models import Housemate, Cook, Housemate_eats
-from .forms import EetMeeForm
+from .forms import EetMeeForm, inschrijvenForm
 
 
 class SignUpView(generic.CreateView):
@@ -17,21 +17,32 @@ def home_view(request):
     user_objects = Housemate.objects.all()
     date = datetime.datetime.now().date()
     form = EetMeeForm
+    form_inschrijven = inschrijvenForm
     cook = Cook.objects.all()
     cook2 = Cook.objects.get(date=date)
     eetmee = Housemate_eats.objects.filter(cook_id=cook2.pk)
     names = []
+    cookExists = False
+    theCook = None
 
     for housemate in eetmee:
         names.append(housemate.name)
+
+    if Cook.objects.filter(date=date).exists():
+        cookExists = True
+        theCook = Cook.objects.get(date=date).kok
+
 
     context = {
         'user_objects': user_objects,
         'date': date,
         'form': form,
+        'form_inschrijven': form_inschrijven,
         'cook': cook,
         'eetmee': eetmee,
-        'names': names
+        'names': names,
+        'cookExists': cookExists,
+        'theCook': theCook
     }
 
     return render(request, 'home.html', context)
@@ -54,13 +65,11 @@ def eetMee(request, date, name):
     return redirect('home')
 
 
-def showEetmee(request, date, name):
-    cook = Cook.objects.get(date=date)
-    eat = Housemate_eats.objects.get(cook_id=cook.pk, name=name)
+def inschrijven(request, date, name):
+    form_inschrijven = inschrijvenForm(request.POST)
 
-    context = {
-        'eetmee': eat
-    }
+    if form_inschrijven.is_valid():
+        cook = Cook(date=date, kok=name)
+        cook.save()
 
-    redirect('home')
-    return render(request, 'home.html', context)
+    return redirect('home')
