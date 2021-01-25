@@ -1,11 +1,11 @@
 from django.forms import ModelForm
-from .models import HousemateEats
+from .models import Housemate_eats
 
 
 class EetMeeForm(ModelForm):
     class Meta:
-        model = HousemateEats
-        fields = ['eetMee']
+        model = Housemate_eats
+        fields = ['eetmee']
         labels = {
-            'eetMee': ''
+            'eetmee': ''
         }
