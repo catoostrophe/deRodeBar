@@ -30,3 +30,12 @@ class Housemate_eats(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Amount(models.Model):
+    amount = models.FloatField()
+    people = models.IntegerField()
+    cook = models.ForeignKey(Cook, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.amount
