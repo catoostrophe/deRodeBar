@@ -56,10 +56,10 @@ def eetMee(request, date, name):
 
         if Housemate_eats.objects.filter(cook_id=cook.pk, name=name).exists():
             eat = Housemate_eats.objects.get(cook_id=cook.pk, name=name)
-            eat.eetmee = request.POST['eetmee']
+            eat.eetmee = form.cleaned_data['eetmee']
             eat.save()
         else:
-            newEat = Housemate_eats(name=name, eetmee=request.POST['eetmee'], cook=cook)
+            newEat = Housemate_eats(name=name, eetmee=form.cleaned_data['eetmee'], cook=cook)
             newEat.save()
 
     return redirect('home')
