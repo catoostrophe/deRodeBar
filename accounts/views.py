@@ -15,7 +15,7 @@ class SignUpView(generic.CreateView):
 
 def home_view(request):
     user_objects = Housemate.objects.all()
-    date = datetime.datetime.now().date()
+    date = datetime.date(2021, 1, 25)
     form = EetMeeForm
     form_inschrijven = inschrijvenForm
     cook = Cook.objects.all()
